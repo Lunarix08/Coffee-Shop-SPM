@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const registerContainer = document.querySelector('.register-container');
     const closeBtns = document.querySelectorAll('.close-btn');
     const loginLink = document.querySelector('.register-container .login-link');
+    const loginRegisterContainer = document.querySelector('.login-n-register-container');
 
     links.forEach(link => {
         link.addEventListener('click', function(e) {
@@ -18,8 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             document.getElementById(targetId).classList.add('active');
-            loginContainer.style.display = 'none';
-            registerContainer.style.display = 'none';
+            loginRegisterContainer.style.display = 'none'; // Hide login/register when navigating
         });
     });
 
@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         loginContainer.style.display = 'block';
         registerContainer.style.display = 'none';
+        loginRegisterContainer.style.display = 'flex'; // Show the login/register container
     });
 
     registerLink.addEventListener('click', function(e) {
@@ -47,7 +48,21 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.addEventListener('click', function() {
             loginContainer.style.display = 'none';
             registerContainer.style.display = 'none';
-            document.getElementById('home').classList.add('active');
+            loginRegisterContainer.style.display = 'none'; // Hide the login/register container
+            document.getElementById('home').classList.add('active'); // Show home content
         });
+    });
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleCategories = document.getElementById('toggle-categories');
+    const categoriesList = document.getElementById('categories-list');
+
+    toggleCategories.addEventListener('click', function() {
+        // Toggle the display of the categories list
+        if (categoriesList.style.display === 'none' || categoriesList.style.display === '') {
+            categoriesList.style.display = 'block';
+        } else {
+            categoriesList.style.display = 'none';
+        }
     });
 });

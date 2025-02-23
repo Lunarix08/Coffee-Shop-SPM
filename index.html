@@ -24,10 +24,20 @@
     </div>
     <div class="container">
         <div class="content active" id="home">
-            <h1>Home Page</h1>
-            <p>Welcome to the Home Page.</p>
-            <br>
-            <a class="login-btn">Login</a>
+            <section class="hero">
+                <div class="home-container">
+                    <div class="hero-text">
+                        <h1>Selamat Datang Ke<br>Kedai Daily Grind</h1>
+                        <h2>The best coffee in town</h2>
+                        <p>Experience the finest coffee made from the best beans around the world. Join us for a cup of joy.</p>
+                        <a class="login-btn">Login</a>
+                    </div>
+                    <div class="hero-image">
+                        <img src="https://storage.googleapis.com/a1aa/image/EQ7iDqLtGIsQS6Ms8oFTh6eoDbBncOSPwzYUvi7D9NY.jpg" alt="A steaming cup of coffee on a wooden table with coffee beans scattered around" width="600" height="400">
+                    </div>
+                </div>
+            </section>
+           
         </div>
     
         <div class="content" id="about">
@@ -35,14 +45,24 @@
             <p>Learn more about us on this page.</p>
         </div>
     
-        <div class="content" id="menu" >
+        <div class="content" id="menu">
             <div class="banner">
-                <img alt="Main banner image" class="banner-img"  src="https://placehold.co/1200x250" />
+                <img alt="Main banner image" class="banner-img" src="https://placehold.co/1200x250" />
             </div>
             <div class="categories-show">
-                <h2>Semua Produk <i class="fas fa-chevron-down" style="margin-left: 10px;"></i></h2>
+                <h2>Semua Produk <i class="fas fa-chevron-down" style="margin-left: 10px;" id="toggle-categories"></i></h2>
+            </div>
+            <div class="categories-list" id="categories-list" style="display: none;">
+                <ul>
+                    <li>Kategori 1</li>
+                    <li>Kategori 2</li>
+                    <li>Kategori 3</li>
+                    <li>Kategori 4</li>
+                    <li>Kategori 5</li>
+                </ul>
             </div>
             <section class="product-grid">
+                <!-- Existing Product Cards -->
                 <div class="product-card">
                     <div class="product-image-container">
                         <img alt="Gambar Produk 1" class="product-image" src="https://placehold.co/150x150"/>
@@ -56,36 +76,62 @@
                 </div>
                 <div class="product-card">
                     <div class="product-image-container">
-                        <img alt="Gambar Produk 2" class="product-image" src="https://placehold.co/150x150"/>
+                        <img alt="Gambar Produk 1" class="product-image" src="https://placehold.co/150x150"/>
                         <button class="add-button">+ TAMBAH</button>
                     </div>
                     <div class="product-info">
-                        <h3 class="product-name">Nama Produk 2</h3>
-                        <p class="product-price">Harga Produk 2</p>
+                        <h3 class="product-name">Nama Produk 1</h3>
+                        <p class="product-price">Harga Produk 1</p>
                     </div>
-                    <p class="product-description">Hurian Produk 2</p>
+                    <p class="product-description">Hurian Produk 1</p>
                 </div>
+                <!-- New Product Cards -->
                 <div class="product-card">
                     <div class="product-image-container">
-                        <img alt="Gambar Produk 3" class="product-image" src="https://placehold.co/150x150"/>
+                        <img alt="Gambar Produk 5" class="product-image" src="https://placehold.co/150x150"/>
                         <button class="add-button">+ TAMBAH</button>
                     </div>
                     <div class="product-info">
-                        <h3 class="product-name">Nama Produk 3</h3>
-                        <p class="product-price">Harga Produk 3</p>
+                        <h3 class="product-name">Nama Produk 5</h3>
+                        <p class="product-price">Harga Produk 5</p>
                     </div>
-                    <p class="product-description">Hurian Produk 3</p>
+                    <p class="product-description">Hurian Produk 5</p>
                 </div>
+        
                 <div class="product-card">
                     <div class="product-image-container">
-                        <img alt="Gambar Produk 4" class="product-image" src="https://placehold.co/150x150"/>
+                        <img alt="Gambar Produk 6" class="product-image" src="https://placehold.co/150x150"/>
                         <button class="add-button">+ TAMBAH</button>
                     </div>
                     <div class="product-info">
-                        <h3 class="product-name">Nama Produk 4</h3>
-                        <p class="product-price">Harga Produk 4</p>
+                        <h3 class="product-name">Nama Produk 6</h3>
+                        <p class="product-price">Harga Produk 6</p>
                     </div>
-                    <p class="product-description">Hurian Produk 4</p>
+                    <p class="product-description">Hurian Produk 6</p>
+                </div>
+        
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img alt="Gambar Produk 7" class="product-image" src="https://placehold.co/150x150"/>
+                        <button class="add-button">+ TAMBAH</button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Nama Produk 7</h3>
+                        <p class="product-price">Harga Produk 7</p>
+                    </div>
+                    <p class="product-description">Hurian Produk 7</p>
+                </div>
+        
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img alt="Gambar Produk 8" class="product-image" src="https://placehold.co/150x150"/>
+                        <button class="add-button">+ TAMBAH</button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Nama Produk 8</h3>
+                        <p class="product-price">Harga Produk 8</p>
+                    </div>
+                    <p class="product-description">Hurian Produk 8</p>
                 </div>
             </section>
         </div>
@@ -97,19 +143,20 @@
     </div>
     
 
-    <div class="login-n-register-container">
-        <div class="login-container">
+    <div class="login-n-register-container" >
+        <div class="login-container" style="width: 310px;">
             <button class="close-btn">&times;</button>
             <h2>Login</h2>
             <p>E-mel:</p>
             <input placeholder="E-mel" type="email" />
             <p>Kata Laluan:</p>
             <input placeholder="Password" type="password" />
-            <button class="login-btn">Login</button>
             <a class="register-link" href="#">Pengguna Baharu? Daftar Sini!</a>
+            <button class="login-btn">Login</button>
+            
         </div>
-
-        <div class="register-container" style="width: 450px; position: relative; top:70px;">
+    
+        <div class="register-container" style="width: 500px;">
             <button class="close-btn">&times;</button>
             <h2>Pendaftaran</h2>
             <p>Nama:</p>
@@ -122,8 +169,9 @@
             <input placeholder="Password" type="password" />
             <p>Semak Kata Laluan:</p>
             <input placeholder="Confirm Password" type="password" />
-            <button class="register-btn">Daftar</button>
             <a class="login-link" href="#">Already have an account? Login!</a>
+            <button class="register-btn">Daftar</button>
+            
         </div>
     </div>
 </body>
