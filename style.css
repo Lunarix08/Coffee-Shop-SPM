@@ -72,11 +72,16 @@ body, html {
     border-radius: 5px;
     cursor: pointer;
 }
+.container {
+    width: 100%;
+    height: 100%;
+}
 .content {
     display: none;
     color: rgb(0, 0, 0);
     text-align: center;
 }
+
 .content.active {
     display: block;
 }
@@ -137,6 +142,75 @@ body, html {
     font-size: 20px;
     cursor: pointer;
 }
+.banner-img{
+    width: 100%;
+    margin-bottom: 50px;
+}
+.product-grid {
+    display: flex;
+    gap: 55px;
+    margin: 30px;
+    justify-content: center;
+}
+
+.product-card {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: white;
+    transition: box-shadow 0.3s ease;
+    width: 300px;
+}
+
+.product-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.product-image-container {
+    position: relative;
+}
+
+.product-image {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.add-button {
+    background-color: #e2e8f0;
+    color: #000;
+    font-size: 0.875rem;
+    padding: 0.25rem 1rem;
+    border-radius: 9999px;
+    position: absolute;
+    bottom: 15px;
+    right: 10px;
+    border: none;
+    cursor: pointer;
+}
+.product-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-name {
+    font-size: 1.125rem;
+    font-weight: bold;
+}
+
+.product-price {
+    font-size: 0.875rem;
+    color: #4A5568; /* Gray color */
+}
+
+.product-description {
+    font-size: 15px;
+    color: #718096;
+    text-align: left;
+    margin-top: 0;
+}
+
 @media (max-width: 1048px) {
     .navbar .logo {
         display: none;
@@ -164,70 +238,5 @@ body, html {
     .login-container .login-btn, .register-container .register-btn {
         padding: 8px;
     }
-}
 
-/* Add this to your existing style.css */
-
-.product-grid {
-    display: flex;
-    gap: 2rem;
-    margin: 2rem 0;
-}
-
-.product-card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 1rem;
-    background-color: white;
-    transition: box-shadow 0.3s ease;
-}
-
-.product-card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.product-image-container {
-    position: relative;
-}
-
-.product-image {
-    width: 100%;
-    height: 12rem;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-}
-
-.add-button {
-    background-color: #e2e8f0;
-    color: #000;
-    font-size: 0.875rem;
-    padding: 0.25rem 1rem;
-    border-radius: 9999px;
-    position: absolute;
-    bottom: 0.5rem;
-    right: 0.5rem;
-    border: none;
-    cursor: pointer;
-}
-
-.product-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.product-name {
-    font-size: 1.125rem;
-    font-weight: bold;
-}
-
-.product-price {
-    font-size: 0.875rem;
-    color: #4A5568; /* Gray color */
-}
-
-.product-description {
-    font-size: 0.875rem;
-    color: #718096; /* Darker gray */
 }
