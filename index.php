@@ -23,6 +23,11 @@
         </ul>
     </div>
     <div class="container">
+        <?php if (isset($_GET['error'])): ?>
+            <div class="error-message">
+                <?php echo htmlspecialchars($_GET['error']); ?>
+            </div>
+        <?php endif; ?>
         <div class="content active" id="home">
             <section class="hero">
                 <div class="home-container">

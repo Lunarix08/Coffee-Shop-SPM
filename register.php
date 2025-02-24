@@ -14,7 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($stmt->execute()) {
         echo "Registration successful!";
     } else {
-        echo "Error: " . $stmt->error;
+        header("Location: index.php?error=Error: " . $stmt->error);
+        exit();
     }
 
     $stmt->close();
