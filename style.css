@@ -278,11 +278,13 @@ body, html {
 .product-name {
     font-size: 1.125rem;
     font-weight: bold;
+    text-align: left;
 }
 
 .product-price {
     font-size: 0.875rem;
     color: #4A5568; /* Gray color */
+    text-align: right;
 }
 
 .product-description {
