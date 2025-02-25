@@ -178,10 +178,9 @@ session_start();
                 <input name="emel" placeholder="E-mel" type="email" required />
                 <p>Kata Laluan:</p>
                 <input name="password" placeholder="Password" type="password" required />
-                <?php if (isset($_SESSION['error'])): ?>
+                <?php if (isset($loginError)): ?>
                     <div class="error-message">
-                        <?php echo htmlspecialchars($_SESSION['error']); ?>
-                        <?php unset($_SESSION['error']); // Clear the error message after displaying ?>
+                        <p><?php echo htmlspecialchars($loginError); ?></p>
                     </div>
                 <?php endif; ?>
                 <a class="register-link" href="#">Pengguna Baharu? Daftar Sini!</a>
@@ -203,10 +202,9 @@ session_start();
                 <input name="password" placeholder="Password" type="password" required />
                 <p>Semak Kata Laluan:</p>
                 <input name="confirm_password" placeholder="Confirm Password" type="password" required />
-                <?php if (isset($_SESSION['error'])): ?>
+                <?php if (isset($registerError)): ?>
                     <div class="error-message">
-                        <?php echo htmlspecialchars($_SESSION['error']); ?>
-                        <?php unset($_SESSION['error']); // Clear the error message after displaying ?>
+                        <p><?php echo htmlspecialchars($registerError); ?></p>
                     </div>
                 <?php endif; ?>
                 <a class="login-link" href="#">Pengguna Baharu? Daftar Sini!</a>

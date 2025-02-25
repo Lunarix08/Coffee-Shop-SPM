@@ -19,13 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "Login successful! Welcome, " . $user['namaPelanggan'];
         } else {
             // Invalid password
-            $_SESSION['error'] = "Invalid password.";
+            $_SESSION['login_error'] = "Invalid password."; // Changed to login_error
             header("Location: index.php"); // Redirect to the login page
             exit();
         }
     } else {
         // No user found
-        $_SESSION['error'] = "No user found with that email.";
+        $_SESSION['login_error'] = "No user found with that email."; // Changed to login_error
         header("Location: index.php"); // Redirect to the login page
         exit();
     }

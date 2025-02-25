@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "Registration successful!";
     } else {
         // Error during registration
-        $_SESSION['error'] = "Error: " . $stmt->error;
+        $_SESSION['register_error'] = "Error: " . $stmt->error; // Changed to register_error
         header("Location: index.php"); // Redirect to the registration page
         exit();
     }
