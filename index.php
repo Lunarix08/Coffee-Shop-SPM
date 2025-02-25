@@ -1,9 +1,31 @@
 <?php
-session_start(); // Start the session
-?>
+session_start();
 
+?>
+<?php if (isset($_SESSION['login_error'])): ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            showLogin();
+        });
+    </script>
+    <?php 
+    $loginError = $_SESSION['login_error']; 
+    unset($_SESSION['login_error']); 
+    ?>
+<?php elseif (isset($_SESSION['register_error'])): ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            showRegister();
+        });
+    </script>
+    <?php 
+    $registerError = $_SESSION['register_error']; 
+    unset($_SESSION['register_error']); 
+    ?>
+<?php endif; ?>
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -187,6 +209,7 @@ session_start(); // Start the session
                         <?php unset($_SESSION['error']); // Clear the error message after displaying ?>
                     </div>
                 <?php endif; ?>
+                <a class="login-link" href="#">Pengguna Baharu? Daftar Sini!</a>
                 <button type="submit" class="register-btn">Daftar</button>
             </form>
         </div>

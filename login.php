@@ -20,15 +20,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             // Invalid password
             $_SESSION['error'] = "Invalid password.";
-            $_SESSION['show_login'] = true; // Indicate to show the login form
-            include 'index.php'; // Include the index file to show the login form
+            header("Location: index.php"); // Redirect to the login page
             exit();
         }
     } else {
         // No user found
         $_SESSION['error'] = "No user found with that email.";
-        $_SESSION['show_login'] = true; // Indicate to show the login form
-        include 'index.php'; // Include the index file to show the login form
+        header("Location: index.php"); // Redirect to the login page
         exit();
     }
 

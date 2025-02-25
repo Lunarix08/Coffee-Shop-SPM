@@ -17,14 +17,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         // Error during registration
         $_SESSION['error'] = "Error: " . $stmt->error;
-        header("Location: index.php");
+        header("Location: index.php"); // Redirect to the registration page
         exit();
     }
 
     $stmt->close();
 }
 
-$conn->close();
-?>
 $conn->close();
 ?>
