@@ -1,3 +1,7 @@
+<?php
+session_start(); // Start the session
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,11 +27,6 @@
         </ul>
     </div>
     <div class="container">
-        <?php if (isset($_GET['error'])): ?>
-            <div class="error-message">
-                <?php echo htmlspecialchars($_GET['error']); ?>
-            </div>
-        <?php endif; ?>
         <div class="content active" id="home">
             <section class="hero">
                 <div class="home-container">
@@ -157,11 +156,17 @@
                 <input name="emel" placeholder="E-mel" type="email" required />
                 <p>Kata Laluan:</p>
                 <input name="password" placeholder="Password" type="password" required />
+                <?php if (isset($_SESSION['error'])): ?>
+                    <div class="error-message">
+                        <?php echo htmlspecialchars($_SESSION['error']); ?>
+                        <?php unset($_SESSION['error']); // Clear the error message after displaying ?>
+                    </div>
+                <?php endif; ?>
                 <a class="register-link" href="#">Pengguna Baharu? Daftar Sini!</a>
                 <button type="submit" class="login-btn">Login</button>
             </form>
         </div>
-    
+
         <div class="register-container" style="width: 500px;">
             <button class="close-btn">&times;</button>
             <h2>Pendaftaran</h2>
@@ -176,6 +181,12 @@
                 <input name="password" placeholder="Password" type="password" required />
                 <p>Semak Kata Laluan:</p>
                 <input name="confirm_password" placeholder="Confirm Password" type="password" required />
+                <?php if (isset($_SESSION['error'])): ?>
+                    <div class="error-message">
+                        <?php echo htmlspecialchars($_SESSION['error']); ?>
+                        <?php unset($_SESSION['error']); // Clear the error message after displaying ?>
+                    </div>
+                <?php endif; ?>
                 <button type="submit" class="register-btn">Daftar</button>
             </form>
         </div>

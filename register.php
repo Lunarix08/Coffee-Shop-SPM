@@ -1,4 +1,5 @@
 <?php
+session_start(); // Start the session
 include 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -14,12 +15,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($stmt->execute()) {
         echo "Registration successful!";
     } else {
-        header("Location: index.php?error=Error: " . $stmt->error);
+        // Error during registration
+        $_SESSION['error'] = "Error: " . $stmt->error;
+        header("Location: index.php");
         exit();
     }
 
     $stmt->close();
 }
 
+$conn->close();
+?>
 $conn->close();
 ?>

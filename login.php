@@ -1,4 +1,5 @@
 <?php
+session_start(); // Start the session
 include 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -14,13 +15,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
         if (password_verify($password, $user['password'])) {
+            // Successful login
             echo "Login successful! Welcome, " . $user['namaPelanggan'];
         } else {
-            header("Location: index.php?error=Invalid password.");
+            // Invalid password
+            $_SESSION['error'] = "Invalid password.";
+            $_SESSION['show_login'] = true; // Indicate to show the login form
+            include 'index.php'; // Include the index file to show the login form
             exit();
         }
     } else {
-        header("Location: index.php?error=No user found with that email.");
+        // No user found
+        $_SESSION['error'] = "No user found with that email.";
+        $_SESSION['show_login'] = true; // Indicate to show the login form
+        include 'index.php'; // Include the index file to show the login form
         exit();
     }
 
