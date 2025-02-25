@@ -148,35 +148,36 @@
     </div>
     
 
-    <div class="login-n-register-container" >
+    <div class="login-n-register-container">
         <div class="login-container" style="width: 310px;">
             <button class="close-btn">&times;</button>
             <h2>Login</h2>
-            <p>E-mel:</p>
-            <input placeholder="E-mel" type="email" />
-            <p>Kata Laluan:</p>
-            <input placeholder="Password" type="password" />
-            <a class="register-link" href="#">Pengguna Baharu? Daftar Sini!</a>
-            <button class="login-btn">Login</button>
-            
+            <form action="login.php" method="POST">
+                <p>E-mel:</p>
+                <input name="emel" placeholder="E-mel" type="email" required />
+                <p>Kata Laluan:</p>
+                <input name="password" placeholder="Password" type="password" required />
+                <a class="register-link" href="#">Pengguna Baharu? Daftar Sini!</a>
+                <button type="submit" class="login-btn">Login</button>
+            </form>
         </div>
     
         <div class="register-container" style="width: 500px;">
             <button class="close-btn">&times;</button>
             <h2>Pendaftaran</h2>
-            <p>Nama:</p>
-            <input placeholder="Nama" type="text" />
-            <p>Nom H/P:</p>
-            <input placeholder="Phone Number" type="tel" />
-            <p>E-mel:</p>
-            <input placeholder="Email" type="email" />
-            <p>Kata Laluan:</p>
-            <input placeholder="Password" type="password" />
-            <p>Semak Kata Laluan:</p>
-            <input placeholder="Confirm Password" type="password" />
-            <a class="login-link" href="#">Already have an account? Login!</a>
-            <button class="register-btn">Daftar</button>
-            
+            <form action="register.php" method="POST">
+                <p>Nama:</p>
+                <input name="namaPelanggan" placeholder="Nama" type="text" required />
+                <p>Nom H/P:</p>
+                <input name="nomhp" placeholder="Phone Number" type="tel" required />
+                <p>E-mel:</p>
+                <input name="emel" placeholder="Email" type="email" required />
+                <p>Kata Laluan:</p>
+                <input name="password" placeholder="Password" type="password" required />
+                <p>Semak Kata Laluan:</p>
+                <input name="confirm_password" placeholder="Confirm Password" type="password" required />
+                <button type="submit" class="register-btn">Daftar</button>
+            </form>
         </div>
     </div>
 </body>
