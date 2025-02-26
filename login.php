@@ -16,7 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = $result->fetch_assoc();
         if (password_verify($password, $user['password'])) {
             // Successful login
-            echo "Login successful! Welcome, " . $user['namaPelanggan'];
+            $_SESSION['user_id'] = $user['id']; // Set user ID in session
+            header("Location: index.php"); // Redirect to index.php
+            exit();
         } else {
             // Invalid password
             $_SESSION['login_error'] = "Kata laluan tidak sah."; // Changed to login_error

@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById(targetId).classList.add('active');
             loginRegisterContainer.style.display = 'none'; // Hide login/register when navigating
             document.querySelector('.container').style.display = 'block'; // Show the main content container
+            document.querySelector('.eating-way').style.display = 'none'; // Hide the main content container
         });
     });
 
@@ -54,6 +55,7 @@ function showLogin() {
     document.querySelector('.register-container').style.display = 'none'; // Ensure the register container is hidden
     document.querySelector('.login-container').style.display = 'block'; // Show the login container
     document.querySelector('.login-n-register-container').style.display = 'flex'; // Show the login/register container
+    document.querySelector('.eating-way').style.display = 'none'; // Hide the main content container
 }
 
 function showRegister() {
@@ -61,7 +63,9 @@ function showRegister() {
     document.querySelector('.login-container').style.display = 'none'; // Ensure the login container is hidden
     document.querySelector('.register-container').style.display = 'block'; // Show the register container
     document.querySelector('.login-n-register-container').style.display = 'flex'; // Show the login/register container
+    document.querySelector('.eating-way').style.display = 'none'; // Hide the main content container
 }
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const toggleCategories = document.getElementById('toggle-categories');
@@ -71,8 +75,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Toggle the display of the categories list
         if (categoriesList.style.display === 'none' || categoriesList.style.display === '') {
             categoriesList.style.display = 'block';
+            
         } else {
             categoriesList.style.display = 'none';
+
         }
     });
 });

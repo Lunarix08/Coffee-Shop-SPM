@@ -376,6 +376,7 @@ body, html {
 }
 .eating-way{
     text-align: center;
+    display: none;
 }
 .title {
     font-size: 1.125rem;

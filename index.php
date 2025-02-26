@@ -47,6 +47,26 @@ session_start();
     <script src="script.js"></script>
 </head>
 <body>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const eatingWayContainer = document.querySelector('.eating-way');
+        
+        // Function to check if user is logged in
+        function checkLoginStatus() {
+            // Assuming you set a session variable in PHP to check login status
+            const isLoggedIn = <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
+            
+            if (!isLoggedIn) {
+                eatingWayContainer.style.display = 'none'; // Hide if not logged in
+            } else {
+                eatingWayContainer.style.display = 'block'; // Show if logged in
+                document.querySelector('.container').style.display = 'none'; // Hide the main content container
+            }
+        }
+
+        checkLoginStatus(); // Call the function on page load
+    });
+    </script>
     <div class="navbar">
         <div class="logo">
             <img src="assets/icon.webp">
