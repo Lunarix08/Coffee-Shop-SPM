@@ -22,6 +22,17 @@ session_start();
     $registerError = $_SESSION['register_error']; 
     unset($_SESSION['register_error']); 
     ?>
+<?php elseif (isset($_SESSION['register_success'])): ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            showLogin();
+            
+        });
+    </script>
+    <?php 
+    $registerSuccess = $_SESSION['register_success']; 
+    unset($_SESSION['register_success']); 
+    ?>
 <?php endif; ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -182,6 +193,10 @@ session_start();
                     <div class="error-message">
                         <p><?php echo htmlspecialchars($loginError); ?></p>
                     </div>
+                <?php elseif (isset($registerSuccess)): ?>
+                    <div class="error-message">
+                        <p><?php echo htmlspecialchars($registerSuccess); ?></p>
+                    </div>
                 <?php endif; ?>
                 <a class="register-link" href="#">Pengguna Baharu? Daftar Sini!</a>
                 <button type="submit" class="login-btn">Login</button>
@@ -206,10 +221,35 @@ session_start();
                     <div class="error-message">
                         <p><?php echo htmlspecialchars($registerError); ?></p>
                     </div>
+                
                 <?php endif; ?>
                 <a class="login-link" href="#">Pengguna Baharu? Daftar Sini!</a>
                 <button type="submit" class="register-btn">Daftar</button>
             </form>
+        </div>
+    </div>
+    <div class="eating-way">
+        <h1 class="title"> Selamat Datang, Pelanggan! </h1>
+            <h2 class="subtitle"> Pilih Cara Makan </h2>
+            <div class="options">
+                <div class="option">
+                <h3 class="option-title"> Dine-In </h3>
+                <img alt="Placeholder image for Dine-In option" height="150" src="https://storage.googleapis.com/a1aa/image/jXsSXhe7SpdviBe0-iu-KrHuxul6Jk1gNpP6X5hOGGw.jpg" width="150" />
+                <p class="option-desc"> Enjoy your meal in our cozy restaurant. </p>
+                <div class="select-table">
+                    <label for="table-select">Choose a table:</label>
+                    <select id="table-select" name="table-select">
+                    <option value="table1">Table 1</option>
+                    <option value="table2">Table 2</option>
+                    <option value="table3">Table 3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="option">
+                <h3 class="option-title"> Take-Away </h3>
+                <img alt="Placeholder image for Take-Away option" height="150" src="https://storage.googleapis.com/a1aa/image/aaclQ9-iEdZWsiRwaQlFuY3N48IHJeT4LNwTCkN2Zb8.jpg" width="150" />
+                <p class="option-desc"> Grab your meal and enjoy it anywhere. </p>
+            </div>
         </div>
     </div>
 </body>

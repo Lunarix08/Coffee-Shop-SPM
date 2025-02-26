@@ -374,3 +374,73 @@ body, html {
         padding: 8px;
     }
 }
+.eating-way{
+    text-align: center;
+}
+.title {
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+  }
+
+  .options {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    gap: 2rem;
+  }
+
+  .option {
+    cursor: pointer;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    width: 12rem;
+    height: 24rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 20px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  .option-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .option img {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .option-desc {
+    font-size: 0.875rem;
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+
+  .select-table {
+    margin-top: 1rem;
+  }
+
+  .select-table label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .select-table select {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ccc;
+  }
