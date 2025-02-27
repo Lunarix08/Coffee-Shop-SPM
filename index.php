@@ -1,7 +1,11 @@
 <?php
 session_start();
+include 'db.php'; // Include the database connection
+include 'meja.php'; // Include the meja.php file to fetch available tables
 
+// Your existing session handling code...
 ?>
+
 <?php if (isset($_SESSION['login_error'])): ?>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -72,6 +76,27 @@ session_start();
             window.location.href = 'logout.php'; // Redirect to logout.php if confirmed
         }
     }
+    document.addEventListener('DOMContentLoaded', function() {
+        const startOrderBtn = document.querySelector('.start-order-btn');
+        const eatingWayContainer = document.querySelector('.eating-way');
+        const mejaSelect = document.querySelector('#meja');
+
+        if (startOrderBtn) {
+            startOrderBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Hide other content
+                document.querySelector('.container').style.display = 'none';
+                eatingWayContainer.style.display = 'block'; // Show the eating way container
+            });
+        }
+
+        mejaSelect.addEventListener('change', function() {
+            const selectedMeja = mejaSelect.value;
+            // You can perform any action with the selected table here
+            console.log(`Selected table: ${selectedMeja}`);
+            // For example, you could send this value to the server or update the UI accordingly
+        });
+    });
     </script>
     <div class="navbar">
         <div class="logo">
@@ -267,15 +292,26 @@ session_start();
         <h2 class="subtitle"> Pilih Cara Makan </h2>
         <div class="options">
             <div class="option">
-            <h3 class="option-title"> Dine-In </h3>
-            <img alt="Placeholder image for Dine-In option" height="150" src="https://storage.googleapis.com/a1aa/image/jXsSXhe7SpdviBe0-iu-KrHuxul6Jk1gNpP6X5hOGGw.jpg" width="150" />
-            <p class="option-desc"> Enjoy your meal in our cozy restaurant. </p>
+                <h3 class="option-title"> Dine-In </h3>
+                <img alt="Placeholder image for Dine-In option" height="150" src="https://storage.googleapis.com/a1aa/image/jXsSXhe7SpdviBe0-iu-KrHuxul6Jk1gNpP6X5hOGGw.jpg" width="150" />
+                <p class="option-desc"> Enjoy your meal in our cozy restaurant. </p>
+                <div class="select-table">
+                    <label for="meja">Pilih Meja:</label>
+                    <select id="meja" name="meja">
+                        <?php foreach ($availableMeja as $meja) { ?>
+                            <option value="<?php echo $meja['noMeja']; ?>"><?php echo $meja['info']; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+            <div class="option">
+                <h3 class="option-title"> Take-Away </h3>
+                <img alt="Placeholder image for Take-Away option" height="150" src="https://storage.googleapis.com/a1aa/image/aaclQ9-iEdZWsiRwaQlFuY3N48IHJeT4LNwTCkN2Zb8.jpg" width="150" />
+                <p class="option-desc"> Grab your meal and enjoy it anywhere. </p>
+                
+            </div>
         </div>
-        <div class="option">
-            <h3 class="option-title"> Take-Away </h3>
-            <img alt="Placeholder image for Take-Away option" height="150" src="https://storage.googleapis.com/a1aa/image/aaclQ9-iEdZWsiRwaQlFuY3N48IHJeT4LNwTCkN2Zb8.jpg" width="150" />
-            <p class="option-desc"> Grab your meal and enjoy it anywhere. </p>
-        </div>
+        
     </div>
 </body>
 </html>
