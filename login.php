@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (password_verify($password, $user['password'])) {
             // Successful login
             $_SESSION['user_id'] = $user['id']; // Set user ID in session
+            $_SESSION['username'] = $user['namaPelanggan']; // Store username in session
             header("Location: index.php"); // Redirect to index.php
             exit();
         } else {

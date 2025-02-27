@@ -66,6 +66,12 @@ session_start();
 
         checkLoginStatus(); // Call the function on page load
     });
+    function confirmLogout() {
+        const confirmation = confirm("Adakah anda pasti ingin log keluar?");
+        if (confirmation) {
+            window.location.href = 'logout.php'; // Redirect to logout.php if confirmed
+        }
+    }
     </script>
     <div class="navbar">
         <div class="logo">
@@ -77,7 +83,11 @@ session_start();
             <li><a href="#about">Tentang<br>Kami</a></li>
             <li><a href="#menu">Menu<br>Kami</a></li>
             <li><a href="#contact">Hubungi<br>Kami</a></li>
+            
         </ul>
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <a class="logout-btn" onclick="confirmLogout()">Logout</a>
+        <?php endif; ?>
     </div>
     <div class="container">
         <div class="content active" id="home">
@@ -87,7 +97,11 @@ session_start();
                         <h1>Selamat Datang Ke<br>Kedai Daily Grind</h1>
                         <h2>The best coffee in town</h2>
                         <p>Experience the finest coffee made from the best beans around the world. Join us for a cup of joy.</p>
-                        <a class="login-btn">Login</a>
+                        <?php if (isset($_SESSION['user_id'])): ?>
+                            <a class="start-order-btn" href="#eating-way">Start Order</a>
+                        <?php else: ?>
+                            <a class="login-btn">Login</a>
+                        <?php endif; ?>
                     </div>
                     <div class="hero-image">
                         <img src="https://storage.googleapis.com/a1aa/image/EQ7iDqLtGIsQS6Ms8oFTh6eoDbBncOSPwzYUvi7D9NY.jpg" alt="A steaming cup of coffee on a wooden table with coffee beans scattered around" width="600" height="400">
@@ -249,27 +263,26 @@ session_start();
         </div>
     </div>
     <div class="eating-way">
-        <h1 class="title"> Selamat Datang, Pelanggan! </h1>
-            <h2 class="subtitle"> Pilih Cara Makan </h2>
-            <div class="options">
-                <div class="option">
-                <h3 class="option-title"> Dine-In </h3>
-                <img alt="Placeholder image for Dine-In option" height="150" src="https://storage.googleapis.com/a1aa/image/jXsSXhe7SpdviBe0-iu-KrHuxul6Jk1gNpP6X5hOGGw.jpg" width="150" />
-                <p class="option-desc"> Enjoy your meal in our cozy restaurant. </p>
-                <div class="select-table">
-                    <label for="table-select">Choose a table:</label>
-                    <select id="table-select" name="table-select">
-                    <option value="table1">Table 1</option>
-                    <option value="table2">Table 2</option>
-                    <option value="table3">Table 3</option>
-                    </select>
-                </div>
-            </div>
+        <h1 class="title"> Selamat Datang, <?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Pelanggan'; ?>! </h1>
+        <h2 class="subtitle"> Pilih Cara Makan </h2>
+        <div class="options">
             <div class="option">
-                <h3 class="option-title"> Take-Away </h3>
-                <img alt="Placeholder image for Take-Away option" height="150" src="https://storage.googleapis.com/a1aa/image/aaclQ9-iEdZWsiRwaQlFuY3N48IHJeT4LNwTCkN2Zb8.jpg" width="150" />
-                <p class="option-desc"> Grab your meal and enjoy it anywhere. </p>
+            <h3 class="option-title"> Dine-In </h3>
+            <img alt="Placeholder image for Dine-In option" height="150" src="https://storage.googleapis.com/a1aa/image/jXsSXhe7SpdviBe0-iu-KrHuxul6Jk1gNpP6X5hOGGw.jpg" width="150" />
+            <p class="option-desc"> Enjoy your meal in our cozy restaurant. </p>
+            <div class="select-table">
+                <label for="table-select">Choose a table:</label>
+                <select id="table-select" name="table-select">
+                <option value="table1">Table 1</option>
+                <option value="table2">Table 2</option>
+                <option value="table3">Table 3</option>
+                </select>
             </div>
+        </div>
+        <div class="option">
+            <h3 class="option-title"> Take-Away </h3>
+            <img alt="Placeholder image for Take-Away option" height="150" src="https://storage.googleapis.com/a1aa/image/aaclQ9-iEdZWsiRwaQlFuY3N48IHJeT4LNwTCkN2Zb8.jpg" width="150" />
+            <p class="option-desc"> Grab your meal and enjoy it anywhere. </p>
         </div>
     </div>
 </body>

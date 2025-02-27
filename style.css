@@ -116,8 +116,9 @@ body, html {
     margin-bottom: 20px;
 }
 .hero-text a {
-    background-color: #48bb78;
-    color: #fff;
+    background-color: #48bb783d;
+    color: rgb(20 45 33);
+    border: 2px solid rgb(20 45 33);
     padding: 10px 20px;
     border-radius: 5px;
     text-transform: uppercase;
@@ -125,7 +126,8 @@ body, html {
     transition: background-color 0.3s;
 }
 .hero-text a:hover {
-    background-color: #38a169;
+    background-color: #000000;
+    color: white;
 }
 .hero-image {
     flex: 1;
@@ -435,13 +437,30 @@ body, html {
     margin-top: 1rem;
   }
 
-  .select-table label {
+.select-table label {
     display: block;
     margin-bottom: 0.5rem;
-  }
+}
 
-  .select-table select {
+.select-table select {
     padding: 0.5rem;
     border-radius: 0.25rem;
     border: 1px solid #ccc;
-  }
+}
+.logout-btn {
+    background-color: #7f7f7f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    position: absolute;
+    right: 35px;
+    border: 2px solid white;
+}
+.logout-btn:hover {
+    background-color: #c5303069;
+    border: 2px solid darkred;
+}

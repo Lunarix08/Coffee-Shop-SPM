@@ -82,3 +82,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+document.addEventListener('DOMContentLoaded', function() {
+    const startOrderBtn = document.querySelector('.start-order-btn');
+    const eatingWayContainer = document.querySelector('.eating-way');
+
+    if (startOrderBtn) {
+        startOrderBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Hide other content
+            document.querySelector('.container').style.display = 'none';
+            eatingWayContainer.style.display = 'block'; // Show the eating way container
+        });
+    }
+});
