@@ -270,14 +270,6 @@ session_start();
             <h3 class="option-title"> Dine-In </h3>
             <img alt="Placeholder image for Dine-In option" height="150" src="https://storage.googleapis.com/a1aa/image/jXsSXhe7SpdviBe0-iu-KrHuxul6Jk1gNpP6X5hOGGw.jpg" width="150" />
             <p class="option-desc"> Enjoy your meal in our cozy restaurant. </p>
-            <div class="select-table">
-                <label for="table-select">Choose a table:</label>
-                <select id="table-select" name="table-select">
-                <option value="table1">Table 1</option>
-                <option value="table2">Table 2</option>
-                <option value="table3">Table 3</option>
-                </select>
-            </div>
         </div>
         <div class="option">
             <h3 class="option-title"> Take-Away </h3>
