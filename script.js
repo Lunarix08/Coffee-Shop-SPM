@@ -95,3 +95,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+document.addEventListener('DOMContentLoaded', function() {
+    const goToMenuButtons = document.querySelectorAll('.go-to-menu-btn');
+    const eatingWayContainer = document.querySelector('.eating-way');
+    const mainContainer = document.querySelector('.container');
+    const menuContent = document.getElementById('menu');
+    const contents = document.querySelectorAll('.content');
+
+    
+
+    goToMenuButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+            // Hide the eating way container and show the menu
+            eatingWayContainer.style.display = 'none'; // Hide the eating way section
+            mainContainer.style.display = 'block'; // Show the main content container
+            menuContent.classList.add('active'); // Show the menu content
+        });
+    });
+});

@@ -398,18 +398,18 @@ body, html {
     gap: 2rem;
   }
 
-  .option {
+.option {
     cursor: pointer;
     border-radius: 0.5rem;
     padding: 1rem;
-    width: 12rem;
+    width: 400px;
     height: 24rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
+}
 
   .option:hover {
     transform: translateY(-5px);
@@ -453,7 +453,7 @@ body, html {
     border: none;
     padding: 10px 20px;
     border-radius: 20px;
-    cursor: pointer;
+    
     font-size: 16px;
     transition: background-color 0.3s;
     position: absolute;
@@ -463,4 +463,13 @@ body, html {
 .logout-btn:hover {
     background-color: #c5303069;
     border: 2px solid darkred;
+}
+.go-to-menu-btn{
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #88888869;
+    padding: 10px 20px;
+    border: none;
+    margin-top: 25px;
+    width: 80px;
 }

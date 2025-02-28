@@ -293,7 +293,7 @@ include 'meja.php'; // Include the meja.php file to fetch available tables
         <div class="options">
             <div class="option">
                 <h3 class="option-title"> Dine-In </h3>
-                <img alt="Placeholder image for Dine-In option" height="150" src="https://storage.googleapis.com/a1aa/image/jXsSXhe7SpdviBe0-iu-KrHuxul6Jk1gNpP6X5hOGGw.jpg" width="150" />
+                <img alt="Placeholder image for Dine-In option" height="150" src="https://cdn-icons-png.flaticon.com/512/1659/1659463.png" width="150" />
                 <p class="option-desc"> Enjoy your meal in our cozy restaurant. </p>
                 <div class="select-table">
                     <label for="meja">Pilih Meja:</label>
@@ -303,15 +303,17 @@ include 'meja.php'; // Include the meja.php file to fetch available tables
                         <?php } ?>
                     </select>
                 </div>
+                <button class="go-to-menu-btn">Pilih</button>
             </div>
             <div class="option">
                 <h3 class="option-title"> Take-Away </h3>
-                <img alt="Placeholder image for Take-Away option" height="150" src="https://storage.googleapis.com/a1aa/image/aaclQ9-iEdZWsiRwaQlFuY3N48IHJeT4LNwTCkN2Zb8.jpg" width="150" />
+                <img alt="Placeholder image for Take-Away option" height="150" src="https://cdn-icons-png.flaticon.com/512/5247/5247862.png" width="150" />
                 <p class="option-desc"> Grab your meal and enjoy it anywhere. </p>
-                
+                <button class="go-to-menu-btn">Pilih</button>
             </div>
+            
         </div>
-        
+         
     </div>
 </body>
 </html>
