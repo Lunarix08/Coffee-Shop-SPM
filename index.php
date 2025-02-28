@@ -1,9 +1,7 @@
 <?php
 session_start();
-include 'db.php'; // Include the database connection
-include 'meja.php'; // Include the meja.php file to fetch available tables
-
-// Your existing session handling code...
+include 'db.php'; 
+include 'meja.php'; 
 ?>
 
 <?php if (isset($_SESSION['login_error'])): ?>

@@ -149,9 +149,17 @@ body, html {
     height: 100%;
     display: flex;
     justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    
     z-index: 1000; /* Ensure it appears above other content */
     display: none; /* Initially hidden */
+}
+.login-container{
+    margin-top: 300px;
+    height: 303px;
+}
+.register-container{
+    margin-top: 200px;
+    height: 553px;
 }
 .login-container, .register-container {
     position: relative;
@@ -211,11 +219,11 @@ body, html {
     font-size: 20px;
     cursor: pointer;
 }
-.error-message{
+.error-message p{
     font-weight: 700;
     color: red;
     font-size: 12px;
-    margin-bottom: 10px;
+    margin-bottom: 3px;
 }
 .banner-img{
     width: 100%;
