@@ -419,41 +419,46 @@ body, html {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-  .option:hover {
-    transform: translateY(-5px);
+.option:hover {
+    transform: translateY(-2px);
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 20px 40px rgba(0, 0, 0, 0.2);
-  }
+}
 
-  .option-title {
-    font-size: 1.25rem;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-  }
+.option-title {
+    font-size: 25px;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
 
-  .option img {
+.option img {
     width: 8rem;
     height: 8rem;
-  }
+}
 
-  .option-desc {
+.option-desc {
     font-size: 0.875rem;
     text-align: center;
-    margin-top: 0.5rem;
-  }
+    margin-top: 15px;
+    margin-bottom: 0;
+    width: 175px;
+} 
 
-  .select-table {
+.select-table {
     margin-top: 1rem;
-  }
+}
 
 .select-table label {
     display: block;
     margin-bottom: 0.5rem;
+    font-weight: bold;
 }
 
 .select-table select {
-    padding: 0.5rem;
+    padding: 1px 10px;
     border-radius: 0.25rem;
     border: 1px solid #ccc;
+    font-family: "Montserrat", serif;
+    height: 30px;
 }
 .logout-btn {
     background-color: #7f7f7f;
@@ -472,12 +477,20 @@ body, html {
     background-color: #c5303069;
     border: 2px solid darkred;
 }
-.go-to-menu-btn{
+.go-to-menu-btn {
     cursor: pointer;
     border-radius: 5px;
-    background-color: #88888869;
-    padding: 10px 20px;
+    padding: 8px 20px;
     border: none;
-    margin-top: 25px;
-    width: 80px;
+    margin-top: 15px;
+    width: 195px;
+    background-color: #ffedde;
+    font-family: "Montserrat", serif;
+    transition: ease 0.3s;
+    font-weight: 850;
+    border: 1px solid #c4a488;
+}
+.go-to-menu-btn:hover{
+    color: white;
+    background-color: black;
 }
