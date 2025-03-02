@@ -116,3 +116,64 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleCategories = document.getElementById('toggle-categories');
+    const categoriesList = document.getElementById('categories-list');
+
+    toggleCategories.addEventListener('click', function() {
+        // Toggle the display of the categories list
+        if (categoriesList.style.display === 'none' || categoriesList.style.display === '') {
+            categoriesList.style.display = 'block';
+        } else {
+            categoriesList.style.display = 'none';
+        }
+    });
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleCategories = document.getElementById('toggle-categories');
+    const categoriesList = document.getElementById('categories-list');
+    const productGrid = document.getElementById('product-grid'); // Ensure this ID matches your HTML
+
+    toggleCategories.addEventListener('click', function() {
+        // Toggle the display of the categories list
+        categoriesList.style.display = categoriesList.style.display === 'none' ? 'block' : 'none';
+    });
+
+    const categoryItems = document.querySelectorAll('.category-item'); // Ensure these items exist
+    categoryItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const selectedCategory = this.getAttribute('data-category');
+            fetchProducts(selectedCategory); // Fetch products for the selected category
+        });
+    });
+
+    function fetchProducts(category) {
+        fetch(`fetch_products.php?category=${encodeURIComponent(category)}`)
+            .then(response => response.json())
+            .then(products => {
+                if (productGrid) { // Check if productGrid exists
+                    productGrid.innerHTML = ''; // Clear previous products
+                    products.forEach(product => {
+                        const productCard = document.createElement('div');
+                        productCard.classList.add('product-card');
+                        productCard.innerHTML = `
+                            <div class="product-image-container">
+                                <img alt="${product.namaProduk}" class="product-image" src="${product.gambar}" />
+                                <button class="add-button">+ TAMBAH</button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name">${product.namaProduk}</h3>
+                                <p class="product-price">Rp ${product.harga}</p>
+                            </div>
+                            <p class="product-description">${product.deskripsi}</p>
+                        `;
+                        productGrid.appendChild(productCard); // Append the product card to the grid
+                    });
+                } else {
+                    console.error('Product grid element not found.');
+                }
+            })
+            .catch(error => console.error('Error fetching products:', error));
+    }
+});

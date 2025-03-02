@@ -1,6 +1,35 @@
 <?php
 session_start();
 include 'db.php'; 
+function getProducts($conn) {
+    $sql = "SELECT * FROM produk"; // Query to get all products
+    $result = $conn->query($sql);
+    $products = array();
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $products[] = $row; // Add each product to the array
+        }
+    }
+    return $products; // Return the array of products
+}
+
+$products = getProducts($conn); // Call the function to get products
+function getCategories($conn) {
+    $sql = "SELECT DISTINCT kategori FROM produk"; // Adjust the query based on your table structure
+    $result = $conn->query($sql);
+    $categories = array();
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $categories[] = $row['kategori']; // Assuming 'category' is the column name
+        }
+    }
+    return $categories; // Return the array of categories
+}
+
+$availableCategories = getCategories($conn); // Call the function to get categories
+$conn->close(); // Close the database connection
 include 'meja.php'; 
 ?>
 
@@ -104,7 +133,6 @@ include 'meja.php';
         <ul>
             <li><a href="#home">Halaman<br>Utama</a></li>
             <li><a href="#about">Tentang<br>Kami</a></li>
-            <li><a href="#menu">Menu<br>Kami</a></li>
             <li><a href="#contact">Hubungi<br>Kami</a></li>
             
         </ul>
@@ -144,90 +172,30 @@ include 'meja.php';
                 <img alt="Main banner image" class="banner-img" src="https://placehold.co/1200x250" />
             </div>
             <div class="categories-show">
-                <h2>Semua Produk <i class="fas fa-chevron-down" style="margin-left: 10px;" id="toggle-categories"></i></h2>
+                <h2>Semua Kategori <i class="fas fa-chevron-down" style="margin-left: 10px;" id="toggle-categories"></i></h2>
             </div>
             <div class="categories-list" id="categories-list" style="display: none;">
                 <ul>
-                    <li>Kategori 1</li>
-                    <li>Kategori 2</li>
-                    <li>Kategori 3</li>
-                    <li>Kategori 4</li>
-                    <li>Kategori 5</li>
+                    <?php foreach ($availableCategories as $category): ?>
+                        <li class="category-item" data-category="<?php echo htmlspecialchars($category); ?>"><?php echo htmlspecialchars($category); ?></li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
-            <section class="product-grid">
-                <!-- Existing Product Cards -->
-                <div class="product-card">
-                    <div class="product-image-container">
-                        <img alt="Gambar Produk 1" class="product-image" src="https://placehold.co/150x150"/>
-                        <button class="add-button">+ TAMBAH</button>
+            <div class="product-grid" id="product-grid">
+                <?php foreach ($products as $product): ?>
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img alt="<?php echo htmlspecialchars($product['namaProduk']); ?>" class="product-image" src="<?php echo htmlspecialchars($product['gambar']); ?>"/>
+                            <button class="add-button">+ TAMBAH</button>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name"><?php echo htmlspecialchars($product['namaProduk']); ?></h3>
+                            <p class="product-price">RM <?php echo htmlspecialchars($product['harga']); ?></p>
+                        </div>
+                        <p class="product-description"><?php echo htmlspecialchars($product['detail']); ?></p>
                     </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Nama Produk 1</h3>
-                        <p class="product-price">Harga Produk 1</p>
-                    </div>
-                    <p class="product-description">Hurian Produk 1</p>
-                </div>
-                <div class="product-card">
-                    <div class="product-image-container">
-                        <img alt="Gambar Produk 1" class="product-image" src="https://placehold.co/150x150"/>
-                        <button class="add-button">+ TAMBAH</button>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Nama Produk 1</h3>
-                        <p class="product-price">Harga Produk 1</p>
-                    </div>
-                    <p class="product-description">Hurian Produk 1</p>
-                </div>
-                <!-- New Product Cards -->
-                <div class="product-card">
-                    <div class="product-image-container">
-                        <img alt="Gambar Produk 5" class="product-image" src="https://placehold.co/150x150"/>
-                        <button class="add-button">+ TAMBAH</button>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Nama Produk 5</h3>
-                        <p class="product-price">Harga Produk 5</p>
-                    </div>
-                    <p class="product-description">Hurian Produk 5</p>
-                </div>
-        
-                <div class="product-card">
-                    <div class="product-image-container">
-                        <img alt="Gambar Produk 6" class="product-image" src="https://placehold.co/150x150"/>
-                        <button class="add-button">+ TAMBAH</button>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Nama Produk 6</h3>
-                        <p class="product-price">Harga Produk 6</p>
-                    </div>
-                    <p class="product-description">Hurian Produk 6</p>
-                </div>
-        
-                <div class="product-card">
-                    <div class="product-image-container">
-                        <img alt="Gambar Produk 7" class="product-image" src="https://placehold.co/150x150"/>
-                        <button class="add-button">+ TAMBAH</button>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Nama Produk 7</h3>
-                        <p class="product-price">Harga Produk 7</p>
-                    </div>
-                    <p class="product-description">Hurian Produk 7</p>
-                </div>
-        
-                <div class="product-card">
-                    <div class="product-image-container">
-                        <img alt="Gambar Produk 8" class="product-image" src="https://placehold.co/150x150"/>
-                        <button class="add-button">+ TAMBAH</button>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Nama Produk 8</h3>
-                        <p class="product-price">Harga Produk 8</p>
-                    </div>
-                    <p class="product-description">Hurian Produk 8</p>
-                </div>
-            </section>
+                <?php endforeach; ?>
+            </div>
         </div>
     
         <div class="content" id="contact">
