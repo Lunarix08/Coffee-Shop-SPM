@@ -134,6 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const toggleCategories = document.getElementById('toggle-categories');
     const categoriesList = document.getElementById('categories-list');
     const productGrid = document.getElementById('product-grid'); // Ensure this ID matches your HTML
+    const mainTitle = document.querySelector('.categories-show h2'); // Select the main title element
 
     toggleCategories.addEventListener('click', function() {
         // Toggle the display of the categories list
@@ -145,11 +146,26 @@ document.addEventListener('DOMContentLoaded', function() {
         item.addEventListener('click', function() {
             const selectedCategory = this.getAttribute('data-category');
             fetchProducts(selectedCategory); // Fetch products for the selected category
+
+            // Update the main title based on the selected category
+            if (selectedCategory === 'semua') {
+                mainTitle.innerHTML = 'Semua Kategori'; // Set title for all categories
+            } else {
+                mainTitle.innerHTML = selectedCategory; // Set title for the selected category
+            }
+
+            // Ensure the categories list is visible
+            categoriesList.style.display = 'block'; // Always show the category list
         });
     });
 
     function fetchProducts(category) {
-        fetch(`fetch_products.php?category=${encodeURIComponent(category)}`)
+        let url = 'fetch_products.php';
+        if (category !== 'semua') {
+            url += `?category=${encodeURIComponent(category)}`; // Only add category if it's not 'semua'
+        }
+
+        fetch(url)
             .then(response => response.json())
             .then(products => {
                 if (productGrid) { // Check if productGrid exists
@@ -164,9 +180,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
                             <div class="product-info">
                                 <h3 class="product-name">${product.namaProduk}</h3>
-                                <p class="product-price">Rp ${product.harga}</p>
+                                <p class="product-price">RM ${product.harga}</p>
                             </div>
-                            <p class="product-description">${product.deskripsi}</p>
+                            <p class="product-description">${product.detail}</p>
                         `;
                         productGrid.appendChild(productCard); // Append the product card to the grid
                     });

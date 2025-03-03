@@ -22,7 +22,7 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.164);
+    background-color: rgb(192 213 208);
     z-index: 9999;
 }
 .navbar .logo {
@@ -274,8 +274,8 @@ body, html {
 }
 
 .add-button {
-    background-color: #e2e8f0;
-    color: #000;
+    background-color: #3b6d60;
+    color: white;
     font-size: 0.875rem;
     padding: 0.25rem 1rem;
     border-radius: 9999px;
@@ -284,6 +284,8 @@ body, html {
     right: 10px;
     border: none;
     cursor: pointer;
+    border: 1px solid white;
+    font-family: "Montserrat", serif;
 }
 .product-info {
     display: flex;
@@ -310,13 +312,27 @@ body, html {
     margin-top: 0;
 }
 .categories-show {
-    position: relative; /* Set the position to relative for the absolute positioning of the dropdown */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translate(10px, 10px);
+    gap: 10px;
+    
 }
-
+.categories-show h2{
+    font-size: 30px;
+    font-weight: 900;
+}
+.categories-show i{
+    font-size: 20px;
+    font-weight: 900;
+    cursor: pointer;
+}
 .categories-list {
     background-color: white;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 20px;
     padding: 10px;
     position: absolute; /* Position it absolutely */
     z-index: 1000; /* Ensure it appears above other elements */
@@ -324,6 +340,7 @@ body, html {
     left: 50%; /* Center horizontally */
     transform: translateX(-50%); /* Adjust to center */
     display: none; /* Initially hidden */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .categories-list ul {
@@ -335,10 +352,12 @@ body, html {
 .categories-list li {
     padding: 5px 10px;
     cursor: pointer;
+    transition: ease 0.3s;
 }
 
 .categories-list li:hover {
     background-color: #f0f0f0; /* Highlight on hover */
+    border-radius: 25px;
 }
 
 .categories-list ul {

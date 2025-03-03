@@ -22,7 +22,7 @@ function getCategories($conn) {
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            $categories[] = $row['kategori']; // Assuming 'category' is the column name
+            $categories[] = ucfirst($row['kategori']); // Capitalize the first letter
         }
     }
     return $categories; // Return the array of categories
@@ -172,10 +172,11 @@ include 'meja.php';
                 <img alt="Main banner image" class="banner-img" src="https://placehold.co/1200x250" />
             </div>
             <div class="categories-show">
-                <h2>Semua Kategori <i class="fas fa-chevron-down" style="margin-left: 10px;" id="toggle-categories"></i></h2>
+                <h2>Semua Kategori </h2><i class="fas fa-chevron-down" style="margin-left: 10px;" id="toggle-categories"></i>
             </div>
             <div class="categories-list" id="categories-list" style="display: none;">
                 <ul>
+                    <li class="category-item" data-category="semua">Semua Kategori</li> <!-- Add this line -->
                     <?php foreach ($availableCategories as $category): ?>
                         <li class="category-item" data-category="<?php echo htmlspecialchars($category); ?>"><?php echo htmlspecialchars($category); ?></li>
                     <?php endforeach; ?>
