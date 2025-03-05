@@ -160,15 +160,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function fetchProducts(category) {
-        let url = 'fetch_products.php';
-        if (category !== 'semua') {
-            url += `?category=${encodeURIComponent(category)}`; // Only add category if it's not 'semua'
-        }
-
+        let url = 'fetch_products.php?category=' + encodeURIComponent(category);
+    
         fetch(url)
             .then(response => response.json())
             .then(products => {
-                if (productGrid) { // Check if productGrid exists
+                if (productGrid) {
                     productGrid.innerHTML = ''; // Clear previous products
                     products.forEach(product => {
                         const productCard = document.createElement('div');
@@ -184,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
                             <p class="product-description">${product.detail}</p>
                         `;
-                        productGrid.appendChild(productCard); // Append the product card to the grid
+                        productGrid.appendChild(productCard);
                     });
                 } else {
                     console.error('Product grid element not found.');
@@ -192,4 +189,5 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => console.error('Error fetching products:', error));
     }
+    
 });
