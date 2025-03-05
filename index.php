@@ -136,6 +136,11 @@ include 'meja.php';
             <li><a href="#contact">Hubungi<br>Kami</a></li>
             
         </ul>
+        <div class="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">0</span> <!-- This will show the number of items in the cart -->
+        </div>
+
         <?php if (isset($_SESSION['user_id'])): ?>
             <a class="logout-btn" onclick="confirmLogout()">Logout</a>
         <?php endif; ?>
@@ -204,7 +209,12 @@ include 'meja.php';
             <p>Get in touch with us.</p>
         </div>
     </div>
-    
+    <div class="cart-sidebar" >
+        <button class="close-cart-btn">&times;</button> <!-- Close button -->
+        <h2>Your Cart</h2>
+        <div class="cart-items"></div>
+        <button class="checkout-btn">Checkout</button>
+    </div>
 
     <div class="login-n-register-container">
         <div class="login-container" style="width: 310px;">

@@ -117,19 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    const toggleCategories = document.getElementById('toggle-categories');
-    const categoriesList = document.getElementById('categories-list');
 
-    toggleCategories.addEventListener('click', function() {
-        // Toggle the display of the categories list
-        if (categoriesList.style.display === 'none' || categoriesList.style.display === '') {
-            categoriesList.style.display = 'block';
-        } else {
-            categoriesList.style.display = 'none';
-        }
-    });
-});
 document.addEventListener('DOMContentLoaded', function() {
     const toggleCategories = document.getElementById('toggle-categories');
     const categoriesList = document.getElementById('categories-list');
@@ -190,4 +178,106 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Error fetching products:', error));
     }
     
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleCategories = document.getElementById('toggle-categories');
+    const categoriesList = document.getElementById('categories-list');
+
+    toggleCategories.addEventListener('click', function() {
+        // Toggle the display of the categories list
+        categoriesList.style.display = categoriesList.style.display === 'none' ? 'block' : 'none';
+    });
+
+    // Close the categories list if clicking outside of it
+    document.addEventListener('click', function(event) {
+        if (!toggleCategories.contains(event.target) && !categoriesList.contains(event.target)) {
+            categoriesList.style.display = 'none'; // Hide the categories list
+        }
+    });
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const cartIcon = document.querySelector('.cart-icon');
+    const cartCount = document.querySelector('.cart-count');
+    const cartSidebar = document.querySelector('.cart-sidebar');
+    const cartItemsContainer = document.querySelector('.cart-items');
+    const closeCartBtn = document.querySelector('.close-cart-btn');
+    let cartItems = []; // Array to hold cart items
+
+    // Function to update cart count
+    function updateCartCount() {
+        cartCount.textContent = cartItems.length; // Update the cart count
+    }
+
+    // Function to add item to cart
+    function addToCart(product) {
+        const existingProduct = cartItems.find(item => item.name === product.name);
+        if (existingProduct) {
+            existingProduct.quantity += 1; // Increase quantity if already in cart
+        } else {
+            cartItems.push({ ...product, quantity: 1 }); // Add new product with quantity 1
+        }
+        updateCartCount(); // Update the cart count
+        displayCartItems(); // Update the cart items display
+    }
+
+    // Event listener for "TAMBAH" button
+    const addButtons = document.querySelectorAll('.add-button');
+    addButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const productCard = this.closest('.product-card');
+            const productName = productCard.querySelector('.product-name').textContent;
+            const productPrice = productCard.querySelector('.product-price').textContent;
+            const productImage = productCard.querySelector('.product-image').src; // Get product image
+
+            // Create a product object
+            const product = {
+                name: productName,
+                price: productPrice,
+                image: productImage
+            };
+
+            addToCart(product); // Add product to cart
+        });
+    });
+
+    // Event listener for cart icon click
+    cartIcon.addEventListener('click', function() {
+        cartSidebar.classList.toggle('active'); // Toggle sidebar visibility
+        displayCartItems(); // Display cart items
+    });
+
+    // Function to display cart items in the sidebar
+    function displayCartItems() {
+        cartItemsContainer.innerHTML = ''; // Clear previous items
+        cartItems.forEach(item => {
+            const itemDiv = document.createElement('div');
+            itemDiv.classList.add('cart-item');
+            itemDiv.innerHTML = `
+                <img src="${item.image}" alt="${item.name}" class="cart-item-image" />
+                <div class="cart-item-info">
+                    <span class="cart-item-name">${item.name}</span>
+                    <span class="cart-item-price">RM ${item.price}</span>
+                    <input type="number" class="cart-item-quantity" value="${item.quantity}" min="1" data-name="${item.name}" />
+                </div>
+            `;
+            cartItemsContainer.appendChild(itemDiv);
+        });
+    }
+
+    // Event listener for close button
+    closeCartBtn.addEventListener('click', function() {
+        cartSidebar.classList.remove('active'); // Hide the sidebar
+    });
+
+    // Event listener for quantity change
+    cartItemsContainer.addEventListener('change', function(event) {
+        if (event.target.classList.contains('cart-item-quantity')) {
+            const name = event.target.getAttribute('data-name');
+            const quantity = parseInt(event.target.value);
+            const item = cartItems.find(item => item.name === name);
+            if (item) {
+                item.quantity = quantity; // Update quantity in cart
+            }
+        }
+    });
 });
