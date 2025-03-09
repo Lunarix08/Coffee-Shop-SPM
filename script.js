@@ -195,6 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
 document.addEventListener('DOMContentLoaded', function() {
     const cartIcon = document.querySelector('.cart-icon');
     const cartCount = document.querySelector('.cart-count');
@@ -204,21 +205,35 @@ document.addEventListener('DOMContentLoaded', function() {
     let cartItems = []; // Array to hold cart items
 
     // Function to update cart count
-    function updateCartCount() {
-        cartCount.textContent = cartItems.length; // Update the cart count
-    }
-
-    // Function to add item to cart
     function addToCart(product) {
         const existingProduct = cartItems.find(item => item.name === product.name);
         if (existingProduct) {
-            existingProduct.quantity += 1; // Increase quantity if already in cart
+            existingProduct.quantity += 1; // Increase quantity if product already exists
         } else {
-            cartItems.push({ ...product, quantity: 1 }); // Add new product with quantity 1
+            cartItems.push({ ...product, quantity: 1 }); // Add new product if not in cart
         }
-        updateCartCount(); // Update the cart count
-        displayCartItems(); // Update the cart items display
+    
+        updateCartCount(); // Update cart count display
+        displayCartItems(); // Always display cart items
+    
+        // Show cart icon if total items > 1
+        cartIcon.style.display = cartItems.length > 0 ? 'block' : 'none';
     }
+    
+    function updateCartCount() {
+        let totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+        cartCount.textContent = totalQuantity;
+    
+        if (totalQuantity > 0) {
+            cartCount.style.display = 'flex'; // Show circle
+            cartCount.classList.add('pop'); // Trigger pop animation
+            setTimeout(() => cartCount.classList.remove('pop'), 300); // Remove pop after animation
+        } else {
+            cartCount.style.display = 'none'; // Hide when empty
+        }
+    }
+    
+    
 
     // Event listener for "TAMBAH" button
     const addButtons = document.querySelectorAll('.add-button');
@@ -281,3 +296,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+

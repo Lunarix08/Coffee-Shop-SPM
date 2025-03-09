@@ -1,5 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+
+@keyframes pop {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(100px) translateY(-50%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) translateY(-50%);
+    }
+}
 body, html {
     
     margin: 0;
@@ -517,25 +541,50 @@ body, html {
     position: absolute;
     right: 170px;
     cursor: pointer;
+    display: none;
+}
+
+.cart-icon span.cart-count {
+    position: absolute;
+    top: -10px;
+    right: -14px;
+    background-color: #ff0000; /* Red Notification Circle */
+    color: #ffffff; /* White Text */
+    border-radius: 50%; /* Circle Shape */
+    width: 14px;
+    height: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px; /* Smaller Font */
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    padding: 1px; /* Tiny Padding */
+    display: none; /* Hide by Default */
+    animation: pop 0.3s ease forwards; /* Add Pop Animation */
 }
 
 .cart-sidebar {
     position: fixed;
-    top: 0;
-    right: -700px; /* Initially hidden */
+    top: 50%; /* Start from middle */
+    right: -700px; /* Initially Hidden */
     width: 300px;
-    height: 100%;
+    height: 94%; /* Not touching top or bottom */
     background: white;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
     transition: right 0.3s ease;
     z-index: 9999;
     padding: 20px 45px;
+    border-radius: 20px; /* Add rounded corners for premium look */
+    transform: translateY(-50%); /* Perfectly center vertically */
+    overflow-y: auto; /* Scroll if cart items are too many */
 }
 
 .cart-sidebar.active {
-    right: 0; /* Show the sidebar */
-
+    right: 20px; /* Slide out effect */
+    animation: slideIn 0.4s ease forwards;
 }
+
 .close-cart-btn {
     background: none;
     border: none;
@@ -557,7 +606,7 @@ body, html {
 .cart-item-image {
     width: 50px;
     height: 50px;
- margin-right: 10px;
+    margin-right: 10px;
 }
 
 .cart-item-info {
