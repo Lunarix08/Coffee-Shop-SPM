@@ -274,8 +274,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     <span class="cart-item-name">${item.name}</span>
                     <span class="cart-item-price">RM ${item.price}</span>
                     <input type="number" class="cart-item-quantity" value="${item.quantity}" min="1" data-name="${item.name}" />
-                    <button class="remove-item-btn" data-index="${index}">Remove</button>
+                    
                 </div>
+                <button class="remove-item-btn" data-index="${index}">Remove</button>
             `;
             cartItemsContainer.appendChild(itemDiv);
     

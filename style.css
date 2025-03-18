@@ -617,13 +617,13 @@ body, html {
 }
 .cart-item {
     display: flex;
-    align-items: center;
+    align-items: center; /* Ensures vertical centering */
+    justify-content: space-between; /* Pushes content apart */
     margin-bottom: 10px;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 10px;
 }
-
 .cart-item-image {
     width: 50px;
     height: 50px;
@@ -633,6 +633,20 @@ body, html {
 .cart-item-info {
     display: flex;
     flex-direction: column;
+    flex-grow: 1; /* Ensures it takes up available space */
+    justify-content: center; /* Centers content vertically */
+}
+.remove-item-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center; /* Ensures text inside the button is centered */
+    justify-content: center;
+    height: auto; /* Adjust height automatically */
 }
 
 .cart-item-name {
