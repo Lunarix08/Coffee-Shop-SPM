@@ -273,10 +273,10 @@ include 'meja.php';
         <div class="options">
             <div class="option">
                 <h3 class="option-title"> Dine-In </h3>
-                <img alt="Placeholder image for Dine-In option" height="150" src="https://cdn-icons-png.flaticon.com/512/1659/1659463.png" width="150" />
-                <button class="go-to-menu-btn">Pilih</button>
+                <img alt="Dine-In option" height="150" src="https://cdn-icons-png.flaticon.com/512/1659/1659463.png" width="150" />
+                <button class="go-to-menu-btn" onclick="selectOption('Dine In')">Pilih</button>
                 <p class="option-desc"> Enjoy your meal in our cozy restaurant. </p>
-                <div class="select-table">
+                <div class="select-table" id="tableSelection" style="display:none;">
                     <label for="meja">Pilih Meja:</label>
                     <select id="meja" name="meja">
                         <?php foreach ($availableMeja as $meja) { ?>
@@ -284,18 +284,14 @@ include 'meja.php';
                         <?php } ?>
                     </select>
                 </div>
-                
             </div>
             <div class="option">
                 <h3 class="option-title"> Take-Away </h3>
-                <img alt="Placeholder image for Take-Away option" height="150" src="https://cdn-icons-png.flaticon.com/512/5247/5247862.png" width="150" />
-                <button class="go-to-menu-btn">Pilih</button>
+                <img alt="Take-Away option" height="150" src="https://cdn-icons-png.flaticon.com/512/5247/5247862.png" width="150" />
+                <button class="go-to-menu-btn" onclick="selectOption('Take Away')">Pilih</button>
                 <p class="option-desc"> Grab your meal and enjoy it anywhere. </p>
-                
             </div>
-            
         </div>
-         
     </div>
 </body>
 </html>
