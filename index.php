@@ -250,7 +250,7 @@ include 'meja.php';
                 <p>Nama:</p>
                 <input name="namaPelanggan" placeholder="Nama" type="text" required />
                 <p>Nom H/P:</p>
-                <input name="nomhp" placeholder="Phone Number" type="tel" required />
+             <input name="nomhp" placeholder="Phone Number" type="tel" required />
                 <p>E-mel:</p>
                 <input name="emel" placeholder="Email" type="email" required />
                 <p>Kata Laluan:</p>
@@ -275,7 +275,7 @@ include 'meja.php';
             <div class="option">
                 <h3 class="option-title"> Dine-In </h3>
                 <img alt="Placeholder image for Dine-In option" height="150" src="https://cdn-icons-png.flaticon.com/512/1659/1659463.png" width="150" />
-                <button class="go-to-menu-btn">Pilih</button>
+                <button class="go-to-menu-btn" onclick="handleDineIn()">Pilih</button>
                 <p class="option-desc"> Enjoy your meal in our cozy restaurant. </p>
                 <div class="select-table">
                     <label for="meja">Pilih Meja:</label>
@@ -285,18 +285,15 @@ include 'meja.php';
                         <?php } ?>
                     </select>
                 </div>
-                
             </div>
             <div class="option">
                 <h3 class="option-title"> Take-Away </h3>
                 <img alt="Placeholder image for Take-Away option" height="150" src="https://cdn-icons-png.flaticon.com/512/5247/5247862.png" width="150" />
-                <button class="go-to-menu-btn">Pilih</button>
+                <button class="go-to-menu-btn" onclick="handleTakeAway()">Pilih</button>
                 <p class="option-desc"> Grab your meal and enjoy it anywhere. </p>
-                
             </div>
-            
         </div>
-         
     </div>
+
 </body>
 </html>

@@ -354,4 +354,22 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
 });
+function handleDineIn() {
+    const tableValue = document.getElementById('meja').value;
+    recordOrder('Dine In', tableValue);
+}
 
+function handleTakeAway() {
+    recordOrder('Take Away', null);
+}
+function recordOrder(eatingWay, tableValue) {
+    const orderData = {
+        eatingWay: eatingWay,
+        table: tableValue,
+        // Add other order details as needed
+    };
+
+    // Send orderData to the server (using fetch or AJAX)
+    console.log(orderData); // For debugging
+    // Example: fetch('/recordOrder', { method: 'POST', body: JSON.stringify(orderData) });
+}
