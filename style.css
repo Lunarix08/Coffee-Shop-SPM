@@ -563,28 +563,30 @@ body, html {
     display: none; /* Hide by Default */
     animation: pop 0.3s ease forwards; /* Add Pop Animation */
 }
-
 .cart-sidebar {
     position: fixed;
-    top: 50%; /* Start from middle */
-    right: -700px; /* Initially Hidden */
+    top: 50%;
+    right: -700px; /* Initially hidden */
     width: 300px;
-    height: 94%; /* Not touching top or bottom */
+    height: 90vh; /* Fill 90% of the viewport height */
     background: white;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
     transition: right 0.3s ease;
     z-index: 9999;
     padding: 20px 45px;
-    border-radius: 20px; /* Add rounded corners for premium look */
-    transform: translateY(-50%); /* Perfectly center vertically */
-    overflow-y: auto; /* Scroll if cart items are too many */
+    border-radius: 20px; /* Rounded corners */
+    overflow-y: auto; /* Scroll if too many cart items */
+    transform: translateY(-50%); /* Aligns it to the vertical center */
 }
 
 .cart-sidebar.active {
     right: 20px; /* Slide out effect */
     animation: slideIn 0.4s ease forwards;
 }
-
+.cart-total{
+    position: fixed;
+    bottom: 40px;
+}
 .close-cart-btn {
     background: none;
     border: none;
@@ -593,6 +595,25 @@ body, html {
     position: absolute;
     top: 10px;
     right: 10px;
+}
+.cart-items {
+    max-height: 70vh; /* Adjust height as needed */
+    overflow-y: auto; /* Enables vertical scrolling */
+    padding-right: 10px; /* Prevents content from cutting off */
+}
+
+/* Optional: Customize scrollbar for better appearance */
+.cart-items::-webkit-scrollbar {
+    width: 8px;
+}
+
+.cart-items::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+.cart-items::-webkit-scrollbar-track {
+    background: #f0f0f0;
 }
 .cart-item {
     display: flex;

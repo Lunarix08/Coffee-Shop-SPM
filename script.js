@@ -261,10 +261,11 @@ document.addEventListener('DOMContentLoaded', function() {
         displayCartItems(); // Display cart items
     });
 
-    // Function to display cart items in the sidebar
     function displayCartItems() {
         cartItemsContainer.innerHTML = ''; // Clear previous items
-        cartItems.forEach(item => {
+        let totalPrice = 0; // Initialize total price
+    
+        cartItems.forEach((item, index) => {
             const itemDiv = document.createElement('div');
             itemDiv.classList.add('cart-item');
             itemDiv.innerHTML = `
@@ -273,11 +274,65 @@ document.addEventListener('DOMContentLoaded', function() {
                     <span class="cart-item-name">${item.name}</span>
                     <span class="cart-item-price">RM ${item.price}</span>
                     <input type="number" class="cart-item-quantity" value="${item.quantity}" min="1" data-name="${item.name}" />
+                    <button class="remove-item-btn" data-index="${index}">Remove</button>
                 </div>
             `;
             cartItemsContainer.appendChild(itemDiv);
+    
+            totalPrice += parseFloat(item.price.replace("RM", "").trim()) * item.quantity; // Calculate total
+        });
+    
+        // Update total price in the existing cart-total div
+        const totalDiv = document.querySelector('.cart-total h3');
+        if (totalDiv) {
+            totalDiv.innerHTML = `Total: RM ${totalPrice.toFixed(2)}`;
+        }
+    
+        // Add Clear Cart button if items exist
+        let clearCartBtn = document.querySelector('.clear-cart-btn');
+        if (!clearCartBtn) {
+            clearCartBtn = document.createElement('button');
+            clearCartBtn.classList.add('clear-cart-btn');
+            clearCartBtn.textContent = 'Clear Cart';
+            document.querySelector('.cart-total').appendChild(clearCartBtn);
+        }
+    
+        // Event listener for Clear Cart button
+        clearCartBtn.addEventListener('click', function () {
+            cartItems = []; // Empty the cart array
+            displayCartItems(); // Refresh cart display
+            updateCartCount(); // Update cart count to 0
+        });
+    
+        // Event listeners for Remove Buttons
+        document.querySelectorAll('.remove-item-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const index = this.getAttribute('data-index');
+                cartItems.splice(index, 1); // Remove item from array
+                displayCartItems(); // Refresh cart display
+                updateCartCount(); // Update cart count
+            });
+        });
+    
+        // Event listener for quantity change
+        cartItemsContainer.addEventListener('change', function(event) {
+            if (event.target.classList.contains('cart-item-quantity')) {
+                const name = event.target.getAttribute('data-name');
+                const quantity = parseInt(event.target.value);
+                const item = cartItems.find(item => item.name === name);
+                if (item) {
+                    item.quantity = quantity; // Update quantity
+                    if (item.quantity < 1) {
+                        cartItems = cartItems.filter(i => i.name !== name); // Remove item if quantity < 1
+                    }
+                }
+                displayCartItems(); // Recalculate and display total
+                updateCartCount(); // Update cart count
+            }
         });
     }
+    
+    
 
     // Event listener for close button
     closeCartBtn.addEventListener('click', function() {
@@ -291,9 +346,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const quantity = parseInt(event.target.value);
             const item = cartItems.find(item => item.name === name);
             if (item) {
-                item.quantity = quantity; // Update quantity in cart
+                item.quantity = quantity; // Update quantity
             }
+            displayCartItems(); // Recalculate and display total
         }
     });
+    
 });
 
