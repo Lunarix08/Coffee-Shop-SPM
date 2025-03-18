@@ -209,9 +209,10 @@ include 'meja.php';
             <p>Get in touch with us.</p>
         </div>
     </div>
-    <div class="cart-sidebar" >
+    <div class="cart-sidebar" id="sidebar">
         <button class="close-cart-btn">&times;</button> <!-- Close button -->
         <h2>Your Cart</h2>
+        
         <div class="cart-items"></div>
         <div class="cart-total">
             <h3>Total: RM 0.00</h3>

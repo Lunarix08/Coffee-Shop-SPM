@@ -354,22 +354,29 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
 });
+let tableSelect = {
+    type: null,
+    table: null
+};
+
+// Function to record an order
+function recordOrder() {
+    console.log('Table recorded:', tableSelect);
+    // You can push this order to an array or handle it as needed
+}
+
+// Function to handle Dine In
 function handleDineIn() {
     const tableValue = document.getElementById('meja').value;
-    recordOrder('Dine In', tableValue);
+    tableSelect.type = 'Dine In';
+    tableSelect.table = tableValue;
+    recordOrder();
 }
 
+// Function to handle Take Away
 function handleTakeAway() {
-    recordOrder('Take Away', null);
-}
-function recordOrder(eatingWay, tableValue) {
-    const orderData = {
-        eatingWay: eatingWay,
-        table: tableValue,
-        // Add other order details as needed
-    };
-
-    // Send orderData to the server (using fetch or AJAX)
-    console.log(orderData); // For debugging
-    // Example: fetch('/recordOrder', { method: 'POST', body: JSON.stringify(orderData) });
+    tableSelect.type = 'Take Away';
+    tableSelect.table = null; // No table value for take away
+    recordOrder();
+    
 }
