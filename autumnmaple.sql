@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2025 at 05:04 PM
+-- Generation Time: Mar 18, 2025 at 09:52 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `autumnmaple`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `belian`
+--
+
+CREATE TABLE `belian` (
+  `idBelian` int(11) NOT NULL,
+  `idPelanggan` int(11) NOT NULL,
+  `info_belian` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -69,6 +81,21 @@ CREATE TABLE `pelanggan` (
 
 INSERT INTO `pelanggan` (`id`, `nomhp`, `namaPelanggan`, `emel`, `password`) VALUES
 (1, '12312312312', 'Fish', 'abc@gmail.com', '$2y$10$UnBfw/LVQDxXC4zN3V3xROKg6FLb1bGPEpJWs2cJZ3MqjvKKUq8.O');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pesanan`
+--
+
+CREATE TABLE `pesanan` (
+  `bil` int(11) NOT NULL,
+  `tarikh` date NOT NULL,
+  `status` varchar(20) NOT NULL,
+  `idPelanggan` int(11) NOT NULL,
+  `noMeja` int(11) DEFAULT NULL,
+  `cara` enum('Dine In','Take Away') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -137,6 +164,13 @@ INSERT INTO `produk` (`idProduk`, `namaProduk`, `kategori`, `harga`, `detail`, `
 --
 
 --
+-- Indexes for table `belian`
+--
+ALTER TABLE `belian`
+  ADD PRIMARY KEY (`idBelian`),
+  ADD KEY `idPelanggan` (`idPelanggan`);
+
+--
 -- Indexes for table `meja`
 --
 ALTER TABLE `meja`
@@ -150,6 +184,14 @@ ALTER TABLE `pelanggan`
   ADD UNIQUE KEY `emel` (`emel`);
 
 --
+-- Indexes for table `pesanan`
+--
+ALTER TABLE `pesanan`
+  ADD PRIMARY KEY (`bil`),
+  ADD KEY `idPelanggan` (`idPelanggan`),
+  ADD KEY `noMeja` (`noMeja`);
+
+--
 -- Indexes for table `produk`
 --
 ALTER TABLE `produk`
@@ -160,16 +202,45 @@ ALTER TABLE `produk`
 --
 
 --
+-- AUTO_INCREMENT for table `belian`
+--
+ALTER TABLE `belian`
+  MODIFY `idBelian` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `pesanan`
+--
+ALTER TABLE `pesanan`
+  MODIFY `bil` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
   MODIFY `idProduk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `belian`
+--
+ALTER TABLE `belian`
+  ADD CONSTRAINT `belian_ibfk_1` FOREIGN KEY (`idPelanggan`) REFERENCES `pelanggan` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `pesanan`
+--
+ALTER TABLE `pesanan`
+  ADD CONSTRAINT `pesanan_ibfk_1` FOREIGN KEY (`idPelanggan`) REFERENCES `pelanggan` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `pesanan_ibfk_2` FOREIGN KEY (`noMeja`) REFERENCES `meja` (`noMeja`) ON DELETE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
