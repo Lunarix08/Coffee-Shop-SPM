@@ -1,3 +1,4 @@
+let cartItems = []; 
 document.addEventListener('DOMContentLoaded', function() {
     const links = document.querySelectorAll('.navbar ul li a');
     const contents = document.querySelectorAll('.content');
@@ -197,14 +198,17 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM fully loaded and parsed');
+
     const cartIcon = document.querySelector('.cart-icon');
     const cartCount = document.querySelector('.cart-count');
     const cartSidebar = document.querySelector('.cart-sidebar');
     const cartItemsContainer = document.querySelector('.cart-items');
     const closeCartBtn = document.querySelector('.close-cart-btn');
-    let cartItems = []; // Array to hold cart items
+    const totalPriceElement = document.querySelector('.cart-total-price'); // Ensure this element exists in your HTML
+    let cartItems = []; // Array to hold full cart items (with image)
 
-    // Function to update cart count
+    // Function to add a product to the cart
     function addToCart(product) {
         const existingProduct = cartItems.find(item => item.name === product.name);
         if (existingProduct) {
@@ -212,59 +216,64 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             cartItems.push({ ...product, quantity: 1 }); // Add new product if not in cart
         }
-    
+
         updateCartCount(); // Update cart count display
         displayCartItems(); // Always display cart items
-    
-        // Show cart icon if total items > 1
+        updateTotalPrice(); // Update total price display
+
         cartIcon.style.display = cartItems.length > 0 ? 'block' : 'none';
     }
-    
+
+    // Function to update cart count
     function updateCartCount() {
         let totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
         cartCount.textContent = totalQuantity;
-    
+
         if (totalQuantity > 0) {
             cartCount.style.display = 'flex'; // Show circle
-            cartCount.classList.add('pop'); // Trigger pop animation
-            setTimeout(() => cartCount.classList.remove('pop'), 300); // Remove pop after animation
         } else {
             cartCount.style.display = 'none'; // Hide when empty
         }
     }
-    
-    
+
+    // Function to update total price
+    function updateTotalPrice() {
+        let totalPrice = 0; // Initialize total price
+        cartItems.forEach(item => {
+            totalPrice += item.quantity * parseFloat(item.price.replace('RM ', '')); // Calculate total price
+        });
+        totalPriceElement.textContent = 'Total: RM ' + totalPrice.toFixed(2); // Update total price display
+    }
 
     // Event listener for "TAMBAH" button
     const addButtons = document.querySelectorAll('.add-button');
-    addButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const productCard = this.closest('.product-card');
-            const productName = productCard.querySelector('.product-name').textContent;
-            const productPrice = productCard.querySelector('.product-price').textContent;
-            const productImage = productCard.querySelector('.product-image').src; // Get product image
+    if (addButtons.length === 0) {
+        console.error('No add buttons found');
+    } else {
+        addButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                console.log('Add button clicked'); // Log when button is clicked
+                const productCard = this.closest('.product-card');
+                const productName = productCard.querySelector('.product-name').textContent;
+                const productPrice = productCard.querySelector('.product-price').textContent;
+                const productImage = productCard.querySelector('.product-image').src; // Get product image
 
-            // Create a product object
-            const product = {
-                name: productName,
-                price: productPrice,
-                image: productImage
-            };
+                // Create a product object
+                const product = {
+                    name: productName,
+                    price: productPrice,
+                    image: productImage
+                };
 
-            addToCart(product); // Add product to cart
+                addToCart(product); // Add product to cart
+            });
         });
-    });
+    }
 
-    // Event listener for cart icon click
-    cartIcon.addEventListener('click', function() {
-        cartSidebar.classList.toggle('active'); // Toggle sidebar visibility
-        displayCartItems(); // Display cart items
-    });
-
+    // Function to display cart items in the cart sidebar
     function displayCartItems() {
         cartItemsContainer.innerHTML = ''; // Clear previous items
-        let totalPrice = 0; // Initialize total price
-    
+
         cartItems.forEach((item, index) => {
             const itemDiv = document.createElement('div');
             itemDiv.classList.add('cart-item');
@@ -272,88 +281,98 @@ document.addEventListener('DOMContentLoaded', function() {
                 <img src="${item.image}" alt="${item.name}" class="cart-item-image" />
                 <div class="cart-item-info">
                     <span class="cart-item-name">${item.name}</span>
-                    <span class="cart-item-price">RM ${item.price}</span>
+                    <span class="cart-item-price">${item.price}</span>
                     <input type="number" class="cart-item-quantity" value="${item.quantity}" min="1" data-name="${item.name}" />
-                    
                 </div>
                 <button class="remove-item-btn" data-index="${index}">Remove</button>
             `;
             cartItemsContainer.appendChild(itemDiv);
-    
-            totalPrice += parseFloat(item.price.replace("RM", "").trim()) * item.quantity; // Calculate total
-        });
-    
-        // Update total price in the existing cart-total div
-        const totalDiv = document.querySelector('.cart-total h3');
-        if (totalDiv) {
-            totalDiv.innerHTML = `Total: RM ${totalPrice.toFixed(2)}`;
-        }
-    
-        // Add Clear Cart button if items exist
-        let clearCartBtn = document.querySelector('.clear-cart-btn');
-        if (!clearCartBtn) {
-            clearCartBtn = document.createElement('button');
-            clearCartBtn.classList.add('clear-cart-btn');
-            clearCartBtn.textContent = 'Clear Cart';
-            document.querySelector('.cart-total').appendChild(clearCartBtn);
-        }
-    
-        // Event listener for Clear Cart button
-        clearCartBtn.addEventListener('click', function () {
-            cartItems = []; // Empty the cart array
-            displayCartItems(); // Refresh cart display
-            updateCartCount(); // Update cart count to 0
-        });
-    
-        // Event listeners for Remove Buttons
-        document.querySelectorAll('.remove-item-btn').forEach(button => {
-            button.addEventListener('click', function () {
-                const index = this.getAttribute('data-index');
-                cartItems.splice(index, 1); // Remove item from array
-                displayCartItems(); // Refresh cart display
-                updateCartCount(); // Update cart count
+
+            // Add event listener to the quantity input
+            const quantityInput = itemDiv.querySelector('.cart-item-quantity');
+            quantityInput.addEventListener('change', function() {
+                const newQuantity = parseInt(this.value);
+                if (newQuantity > 0) {
+                    item.quantity = newQuantity; // Update the quantity in the cartItems array
+                } else {
+                    // If quantity is 0 or less, remove the item from the cart
+                    cartItems.splice(index, 1);
+                }
+                updateCartCount(); // Update cart count display
+                displayCartItems(); // Refresh the displayed cart items
+                updateTotalPrice(); // Update total price display
             });
         });
-    
-        // Event listener for quantity change
-        cartItemsContainer.addEventListener('change', function(event) {
-            if (event.target.classList.contains('cart-item-quantity')) {
-                const name = event.target.getAttribute('data-name');
-                const quantity = parseInt(event.target.value);
-                const item = cartItems.find(item => item.name === name);
-                if (item) {
-                    item.quantity = quantity; // Update quantity
-                    if (item.quantity < 1) {
-                        cartItems = cartItems.filter(i => i.name !== name); // Remove item if quantity < 1
-                    }
-                }
-                displayCartItems(); // Recalculate and display total
-                updateCartCount(); // Update cart count
-            }
-        });
     }
-    
-    
+
+    // Event listener for cart icon click
+    cartIcon.addEventListener('click', function() {
+        cartSidebar.classList.toggle('active'); // Toggle sidebar visibility
+        displayCartItems(); // Display cart items
+        updateTotalPrice(); // Update total price display when sidebar is opened
+    });
 
     // Event listener for close button
     closeCartBtn.addEventListener('click', function() {
         cartSidebar.classList.remove('active'); // Hide the sidebar
     });
 
-    // Event listener for quantity change
-    cartItemsContainer.addEventListener('change', function(event) {
-        if (event.target.classList.contains('cart-item-quantity')) {
-            const name = event.target.getAttribute('data-name');
-            const quantity = parseInt(event.target.value);
-            const item = cartItems.find(item => item.name === name);
-            if (item) {
-                item.quantity = quantity; // Update quantity
-            }
-            displayCartItems(); // Recalculate and display total
-        }
-    });
-    
+    // Event listener for checkout button
+    const checkoutButton = document.querySelector('.checkout-btn');
+    if (checkoutButton) {
+        checkoutButton.addEventListener('click', function() {
+            console.log('Checkout button clicked'); // Log when checkout is clicked
+            checkout(); // Call the checkout function
+        });
+    } else {
+        console.error('Checkout button not found');
+    }
+
+    // Function to handle checkout
+    function checkout() {
+        const orderType = tableSelect.type; // Get the order type (Dine-In or Take Away)
+        const tableSelected = tableSelect.table; // Get the selected table
+
+        // Prepare simplified cart items for submission
+        const cartItemsToSubmit = cartItems.map(item => ({
+            name: item.name,
+            quantity: item.quantity,
+            price: item.price
+        }));
+
+        // Log cart items before checkout
+        console.log('Cart items before checkout:', cartItemsToSubmit);
+
+        // Create a form to submit the data
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = 'checkout.php'; // Your checkout PHP script
+
+        // Create hidden inputs for order type, table selected, and cart items
+        const orderTypeInput = document.createElement('input');
+        orderTypeInput.type = 'hidden';
+        orderTypeInput.name = 'orderType';
+        orderTypeInput.value = orderType;
+        form.appendChild(orderTypeInput);
+
+        const tableSelectedInput = document.createElement('input');
+        tableSelectedInput.type = 'hidden';
+        tableSelectedInput.name = 'tableSelected';
+        tableSelectedInput.value = tableSelected;
+        form.appendChild(tableSelectedInput);
+
+        const cartItemsInput = document.createElement('input');
+        cartItemsInput.type = 'hidden';
+        cartItemsInput.name = 'cartItems';
+        cartItemsInput.value = JSON.stringify(cartItemsToSubmit); // Convert cart items to JSON
+        form.appendChild(cartItemsInput);
+
+        // Append the form to the body and submit it
+        document.body.appendChild(form);
+        form.submit();
+    }
 });
+
 let tableSelect = {
     type: null,
     table: null
@@ -361,8 +380,12 @@ let tableSelect = {
 
 // Function to record an order
 function recordOrder() {
-    console.log('Table recorded:', tableSelect);
-    // You can push this order to an array or handle it as needed
+    console.log('Order recorded:', tableSelect);
+    // Display the selected table and order type in the cart sidebar
+    const orderInfoDiv = document.querySelector('.table-info');
+    if (orderInfoDiv) {
+        orderInfoDiv.innerHTML = `Order Type: ${tableSelect.type ? tableSelect.type : 'N/A'}<br>Table Selected: ${tableSelect.table ? tableSelect.table : 'N/A'}`;
+    }
 }
 
 // Function to handle Dine In

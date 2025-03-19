@@ -212,12 +212,11 @@ include 'meja.php';
     <div class="cart-sidebar" id="sidebar">
         <button class="close-cart-btn">&times;</button> <!-- Close button -->
         <h2>Your Cart</h2>
-        
+        <div class="table-info">>Order Type: N/A<br>Table Selected: N/A</div>
         <div class="cart-items"></div>
         <div class="cart-total">
-            <h3>Total: RM 0.00</h3>
+            <h3 class="cart-total-price">Total: RM 0.00</h3>
             <button class="checkout-btn">Checkout</button>
-
         </div>
     </div>
 

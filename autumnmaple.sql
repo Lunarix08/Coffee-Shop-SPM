@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2025 at 09:52 AM
+-- Generation Time: Mar 18, 2025 at 04:08 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -30,8 +30,32 @@ SET time_zone = "+00:00";
 CREATE TABLE `belian` (
   `idBelian` int(11) NOT NULL,
   `idPelanggan` int(11) NOT NULL,
-  `info_belian` text NOT NULL
+  `info_belian` text NOT NULL,
+  `jumlah_harga` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `belian`
+--
+
+INSERT INTO `belian` (`idBelian`, `idPelanggan`, `info_belian`, `jumlah_harga`) VALUES
+(12, 1, '', NULL),
+(13, 1, '', NULL),
+(14, 1, '', NULL),
+(15, 1, '', NULL),
+(16, 1, 'Cappuccino x 2', NULL),
+(17, 1, 'Americano x 1', NULL),
+(18, 1, 'Cappuccino x 1', NULL),
+(19, 1, 'Cappuccino x 2', NULL),
+(20, 1, 'Americano x 1, Cappuccino x 1', NULL),
+(21, 1, 'Cappuccino x 1, Americano x 1, Espresso x 1', 31.00),
+(22, 1, 'Cappuccino x 5', 65.00),
+(23, 1, 'Cappuccino x 5, Americano x 5', 115.00),
+(24, 1, 'Cappuccino x 1, Caffè Latte x 1', 27.00),
+(25, 1, 'Caffè Latte x 3', 42.00),
+(26, 1, 'Cappuccino x 3', 39.00),
+(27, 1, 'Americano x 1, Cappuccino x 1', 23.00),
+(28, 1, 'Classic Cheesecake x 1', 15.00);
 
 -- --------------------------------------------------------
 
@@ -96,6 +120,18 @@ CREATE TABLE `pesanan` (
   `noMeja` int(11) DEFAULT NULL,
   `cara` enum('Dine In','Take Away') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pesanan`
+--
+
+INSERT INTO `pesanan` (`bil`, `tarikh`, `status`, `idPelanggan`, `noMeja`, `cara`) VALUES
+(28, '2025-03-18', 'Pending', 1, 1, 'Dine In'),
+(29, '2025-03-18', 'Pending', 1, 1, 'Dine In'),
+(31, '2025-03-18', 'Pending', 1, NULL, 'Take Away'),
+(32, '2025-03-18', 'Pending', 1, NULL, 'Take Away'),
+(33, '2025-03-18', 'Pending', 1, 1, 'Dine In'),
+(34, '2025-03-18', 'Pending', 1, NULL, 'Take Away');
 
 -- --------------------------------------------------------
 
@@ -205,7 +241,7 @@ ALTER TABLE `produk`
 -- AUTO_INCREMENT for table `belian`
 --
 ALTER TABLE `belian`
-  MODIFY `idBelian` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idBelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `pelanggan`
@@ -217,7 +253,7 @@ ALTER TABLE `pelanggan`
 -- AUTO_INCREMENT for table `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `bil` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `bil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `produk`
